@@ -15,11 +15,11 @@
   'use strict';
 
   /**
-   * @ngdoc factory
-   * @name scContentGet
+   * @ngdoc constant
+   * @name scContentBaseURL
    * @description
    *
-   * Provides connectivity with Southbank Centre content provider and index
+   * Provides the Base URL of the Southbank Centre web content service
    */
   angular
     .module('scContent')
@@ -33,7 +33,7 @@
    * @name scContentGet
    * @description
    *
-   * Provides connectivity with Southbank Centre content provider and index
+   * Provides methods for getting content from the Southbank Centre web content service
    */
   angular
     .module('scContent')
