@@ -46,7 +46,8 @@
     var service = {
       item: item,
       items: items,
-      itemByPath: itemByPath
+      itemByPath: itemByPath,
+      itemByURL: itemByURL
     };
     return service;
 
@@ -69,6 +70,14 @@
     function itemByPath(path, params) {
 
       return $http.get(scContentBaseURL + '/' + path, {params: params})
+        .then(_getComplete)
+        .catch(_getFailed);
+
+    }
+
+    function itemByURL(URL, params) {
+
+      return $http.get(URL, {params: params})
         .then(_getComplete)
         .catch(_getFailed);
 
