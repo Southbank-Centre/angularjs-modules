@@ -217,5 +217,71 @@
 
     });
 
+    describe('Method: itemByURL', function() {
+
+      it('should return the requested single item data if the request was well-formed and successful', function() {
+
+        var data;
+
+        $httpBackend
+          .expectGET(scContentBaseURL + '/api/event/event-title-here-1234.json?_source=name,startDate&pretty=true')
+          .respond(200, '{"test": "data"}');
+
+        scContentGet
+          .itemByURL(scContentBaseURL + '/api/event/event-title-here-1234.json', {'_source': 'name,startDate', 'pretty': 'true'})
+          .then(function (response) {
+            data = response;
+        });
+
+        $httpBackend.flush();
+
+        expect(data).toEqual({"test": "data"});
+
+      });
+
+      it('should return no data and broadcast an error if item not found', function() {
+
+        var data;
+
+        $httpBackend
+          .expectGET(scContentBaseURL + '/api/event/event-title-here-1234.json?_source=name,startDate&pretty=true')
+          .respond(404, null);
+
+        scContentGet
+          .itemByURL(scContentBaseURL + '/api/event/event-title-here-1234.json', {'_source': 'name,startDate', 'pretty': 'true'})
+          .then(function (response) {
+            data = response;
+        });
+
+        $httpBackend.flush();
+
+        expect(data).toBe(undefined);
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('data-error', jasmine.any(Object));
+
+      });
+
+      it('should return no data and broadcast an error if there is a server error', function() {
+
+        var data;
+
+        $httpBackend
+          .expectGET(scContentBaseURL + '/api/event/event-title-here-1234.json?_source=name,startDate&pretty=true')
+          .respond(500, null);
+
+        scContentGet
+          .itemByURL(scContentBaseURL + '/api/event/event-title-here-1234.json', {'_source': 'name,startDate', 'pretty': 'true'})
+          .then(function (response) {
+            data = response;
+        });
+
+        $httpBackend.flush();
+
+        expect(data).toBe(undefined);
+        expect($rootScope.$broadcast).toHaveBeenCalledWith('data-error', jasmine.any(Object));
+
+      });
+
+    });
+
   });
 })();
