@@ -13,9 +13,7 @@ dependencies:
 
 test:
   override:
-    - karma start karma.conf.js --single-run:
-        pwd:
-          sc*/*/test/unit
+    - node run_all_unit_tests
 
 general:
   branches:
