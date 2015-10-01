@@ -1,4 +1,8 @@
 machine:
+
+  node:
+    version: 0.12.7
+
   environment:
     SAUCE_TUNNEL_ID: circle-angularjsmodules-$CIRCLE_BUILD_NUM
 
