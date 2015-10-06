@@ -1,0 +1,8 @@
+.DS_Store
+.tmp
+*.sublime-project
+*.sublime-workspace
+
+# Ignore package manager directories.
+bower_components
+node_modules
