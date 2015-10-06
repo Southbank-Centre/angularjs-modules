@@ -9,6 +9,7 @@ glob("sc*/*", function (err, appVersions) {
   if (!err) {
     appVersions.forEach(function(appVersion) {
       var testRun = exec('karma start karma.conf.js --single-run', {'cwd': appVersion + '/test/unit'});
+      console.log('Running tests for: ' + appVersion);
       process.stdout.write(testRun.toString());
     });
   }
